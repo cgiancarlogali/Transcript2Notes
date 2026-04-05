@@ -1,7 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+:root[data-theme="light"] {
+  /* Light Theme Color Palette */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-border: #e2e8f0;
+  
+  --bg-gradient-start: #f1f5f9;
+  --bg-gradient-end: #e2e8f0;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.05);
+
+  /* Metrics */
+  --border-radius: 12px;
+  --transition-speed: 0.25s;
+
+  color-scheme: light;
+}
+
 :root {
-  /* Color Palette */
+  /* Dark Theme Color Palette */
   --color-primary: #6366f1;
   --color-primary-hover: #4f46e5;
   --color-background: #0f172a;
@@ -9,6 +31,11 @@
   --color-text-primary: #f8fafc;
   --color-text-secondary: #94a3b8;
   --color-border: #334155;
+  
+  --bg-gradient-start: #1e293b;
+  --bg-gradient-end: #0f172a;
+  --glass-bg: rgba(30, 41, 59, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.05);
   
   /* Metrics */
   --border-radius: 12px;
@@ -21,6 +48,7 @@
   color-scheme: dark;
   color: var(--color-text-primary);
   background-color: var(--color-background);
+  transition: color var(--transition-speed), background-color var(--transition-speed);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -34,7 +62,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+  background: radial-gradient(circle at top, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  transition: background var(--transition-speed);
 }
 
 #root {

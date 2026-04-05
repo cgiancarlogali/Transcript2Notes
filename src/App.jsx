@@ -1,9 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
   const [transcript, setTranscript] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   // Handler for Phase 2: Will trigger the API call later
   const handleGenerateNotes = () => {
@@ -24,6 +36,20 @@ function App() {
 
   return (
     <div className="app-container">
+      <div className="theme-switch-wrapper">
+        <span>☀️</span>
+        <label className="theme-switch" htmlFor="checkbox">
+          <input
+            type="checkbox"
+            id="checkbox"
+            checked={theme === 'dark'}
+            onChange={toggleTheme}
+          />
+          <div className="slider round"></div>
+        </label>
+        <span>🌙</span>
+      </div>
+      
       <header className="header">
         <h1>Transcript2Notes</h1>
         <p>Transform your meetings and classes into structured, actionable guides.</p>
@@ -39,7 +65,7 @@ function App() {
             <textarea
               id="transcript"
               rows={12}
-              placeholder="e.g. 'Welcome everyone to today's meeting. We're going to discuss...'"
+              placeholder="e.g. 'Welcome everyone to today\'s meeting. We\'re going to discuss...'"
               value={transcript}
               onChange={(e) => setTranscript(e.target.value)}
               disabled={isProcessing}
